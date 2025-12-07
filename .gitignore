@@ -1,0 +1,14 @@
+# Ignore everything in the directory
+
+# EXCEPT for directories (so Git can traverse the file system)
+
+!*/
+
+# EXCEPT for the specific files you want to upload
+
+!README.md
+!Crawler.ipynb
+
+# If your notebook needs files from .ipynb_checkpoints/, you might need to exclude that too:
+
+!.ipynb_checkpoints/
