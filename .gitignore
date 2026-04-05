@@ -1,14 +1,23 @@
-# Ignore everything in the directory
+# 1. Ignore EVERYTHING by default
+/*
 
-# EXCEPT for directories (so Git can traverse the file system)
-
-!*/
-
-# EXCEPT for the specific files you want to upload
-
+# 2. Allow the app folder and the streamlit file
+!/app/
+!/streamlit_app.py
+!/requirements.txt
+!/start.sh
+!/.gitignore
 !README.md
 !Crawler.ipynb
+
+# 3. Specifically re-ignore the junk inside the app folder
+/app/**/__pycache__/
+/app/**/*.pyc
+
+
 
 # If your notebook needs files from .ipynb_checkpoints/, you might need to exclude that too:
 
 !.ipynb_checkpoints/
+
+# git remote add origin https://github.com/sezar543/bricklink-valuation-tool.git
