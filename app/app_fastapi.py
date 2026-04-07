@@ -27,10 +27,12 @@ import math
 from plotly.offline import plot
 
 # Define the path to the project root where .env is located
-ENV_PATH = Path(__file__).resolve().parent.parent / ".env" 
-
+# uncomment for local running
+# ENV_PATH = Path(__file__).resolve().parent.parent / ".env" 
 # Load environment variables from the explicit path
-load_dotenv(dotenv_path=ENV_PATH)
+# load_dotenv(dotenv_path=ENV_PATH)
+
+load_dotenv()
 
 BRICKLINK_BASE_URL = "https://api.bricklink.com/api/store/v1"
 
