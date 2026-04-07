@@ -47,10 +47,10 @@ BRICKLINK_BASE_URL = "https://api.bricklink.com/api/store/v1"
 # ACCESS_TOKEN = os.environ.get("BRICKLINK_TOKEN_VALUE")
 # TOKEN_SECRET = os.environ.get("BRICKLINK_TOKEN_SECRET")
 
-BRICKLINK_CONSUMER_KEY = "F77F41502C8041E49EC42529EA26FAD7"
-BRICKLINK_CONSUMER_SECRET = "E214EF5F097441F0949514A76DE5749E"
-BRICKLINK_TOKEN_VALUE = "D8BEDCA603844337BA58181B5FCF644F"
-BRICKLINK_TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2"
+CONSUMER_KEY = "F77F41502C8041E49EC42529EA26FAD7"
+CONSUMER_SECRET = "E214EF5F097441F0949514A76DE5749E"
+ACCESS_TOKEN = "D8BEDCA603844337BA58181B5FCF644F"
+TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2"
 
 
 # CONSUMER_KEY = "F77F41502C8041E49EC42529EA26FAD7" # Replace with your Consumer Key
@@ -80,24 +80,24 @@ TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2" # Replace with your Token Secr
 # if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
 #     raise ValueError("Missing one or more BrickLink API credentials in .env file.")
 
-# Temporary debug: Print all available environment keys to see what Railway IS providing
-print(f"DEBUG: Available Env Keys: {list(os.environ.keys())}")
+# # Temporary debug: Print all available environment keys to see what Railway IS providing
+# print(f"DEBUG: Available Env Keys: {list(os.environ.keys())}")
 
-# DEBUGGING PRINTS (Check your Railway Logs for these)
-print(f"DEBUG: CONSUMER_KEY present: {bool(CONSUMER_KEY)}")
-print(f"DEBUG: TOKEN_VALUE present: {bool(TOKEN_VALUE)}")
+# # DEBUGGING PRINTS (Check your Railway Logs for these)
+# print(f"DEBUG: CONSUMER_KEY present: {bool(CONSUMER_KEY)}")
+# print(f"DEBUG: TOKEN_VALUE present: {bool(TOKEN_VALUE)}")
 
-if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
-    # This prints exactly which one is missing to your logs
-    missing = [k for k, v in {
-        "KEY": CONSUMER_KEY, 
-        "C_SECRET": CONSUMER_SECRET, 
-        "TOKEN": TOKEN_VALUE, 
-        "T_SECRET": TOKEN_SECRET
-    }.items() if not v]
-    print(f"CRITICAL ERROR: Missing variables: {missing}")
-    # Keep your raise here so the app doesn't try to run with broken auth
-    raise ValueError(f"Missing BrickLink credentials: {missing}")
+# if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
+#     # This prints exactly which one is missing to your logs
+#     missing = [k for k, v in {
+#         "KEY": CONSUMER_KEY, 
+#         "C_SECRET": CONSUMER_SECRET, 
+#         "TOKEN": TOKEN_VALUE, 
+#         "T_SECRET": TOKEN_SECRET
+#     }.items() if not v]
+#     print(f"CRITICAL ERROR: Missing variables: {missing}")
+#     # Keep your raise here so the app doesn't try to run with broken auth
+#     raise ValueError(f"Missing BrickLink credentials: {missing}")
 
 
 # Define the directory where inventory files will be saved
