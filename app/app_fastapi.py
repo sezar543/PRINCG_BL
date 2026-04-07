@@ -32,7 +32,7 @@ ENV_PATH = Path(__file__).resolve().parent.parent / ".env"
 # Load environment variables from the explicit path
 load_dotenv(dotenv_path=ENV_PATH)
 
-BRICKLINK_API_BASE_URL = "https://api.bricklink.com/api/store/v1"
+BRICKLINK_BASE_URL = "https://api.bricklink.com/api/store/v1"
 
 # Load credentials from environment variables
 CONSUMER_KEY = os.getenv("BRICKLINK_CONSUMER_KEY")
@@ -53,22 +53,20 @@ TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2" # Replace with your Token Secr
 # TOKEN_SECRET = "D1517DCF204C41D5815629BE350C168D"
 
 # IP: 50.64.16.78 Artistry
-ACCESS_TOKEN = "E584C64AF7C547FBA82B7D730624C274"
-TOKEN_SECRET = "17B5ED145DF84EB898CED907A0F07DA0"
+# ACCESS_TOKEN = "E584C64AF7C547FBA82B7D730624C274"
+# TOKEN_SECRET = "17B5ED145DF84EB898CED907A0F07DA0"
 
 #IP parents    135.12.196.68
 # ACCESS_TOKEN = "D821AF251A794843AAAC9B7123BB7B09"
 # TOKEN_SECRET = "F117B1921E344DB2AF74C26DEEDB1CA7"
 
 #IP     184.71.139.178 StarBucks broadway
-# ACCESS_TOKEN = "C43E5D5FD4244E21A3B35EFBD1E6D523"
-# TOKEN_SECRET = "B3285CDD9D5D4992BAFDD90784DB7C3D"
+ACCESS_TOKEN = "C43E5D5FD4244E21A3B35EFBD1E6D523"
+TOKEN_SECRET = "B3285CDD9D5D4992BAFDD90784DB7C3D"
 
 if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
     raise ValueError("Missing one or more BrickLink API credentials in .env file.")
 
-# Base URL for the BrickLink API
-BRICKLINK_BASE_URL = "https://api.bricklink.com/api/store/v1"
 
 # Define the directory where inventory files will be saved
 INVENTORY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'inventories')

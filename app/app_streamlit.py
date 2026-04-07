@@ -5,8 +5,15 @@ import plotly.express as px
 from typing import Literal
 import os
 import time
+import streamlit.components.v1 as components
+import requests
 
 from app_fastapi import get_set_inventory, get_projections_list
+
+API_URL = os.getenv("API_URL", "http://localhost:8000")
+
+# Example call:
+# response = requests.get(f"{API_URL}/items/set/{set_no}...")
 
 condition_map = {
     'N': 'New',
@@ -15,6 +22,90 @@ condition_map = {
 
 # --- CONFIGURATION & PAGE SETUP ---
 st.set_page_config(page_title="Set Sales & ROI Tracker", layout="wide")
+
+
+# def get_real_projections(set_no: str, condition: str, buy_price: float):
+#     try:
+#         # 1. CALL THE FASTAPI ENDPOINT INSTEAD OF LOCAL FUNCTIONS
+#         # The URL matches the @app.get route in your FastAPI file
+#         url = f"{API_URL}/items/set/{set_no}/risk_value/{condition}/visualize"
+#         params = {"buy_price": buy_price}
+        
+#         response = requests.get(url, params=params)
+        
+#         if response.status_code != 200:
+#             return None, 0, f"API Error: {response.text}", 0, 0
+            
+#         data = response.json()
+        
+#         # 2. Extract data from the JSON response
+#         # (Make sure your FastAPI returns these fields in its JSON)
+#         df = pd.DataFrame(data['projections'])
+#         total_val = data['part_out_value']
+#         n_lots = data['total_parts_processed']
+#         t_items = data.get('total_items', 0) # Adjust based on your API model
+        
+#         return df, total_val, None, n_lots, t_items
+
+#     except Exception as e:
+#         return None, 0, f"Connection Failed: {str(e)}", 0, 0
+
+# def get_real_projections(set_no: str, condition: str, buy_price: float):
+#     try:
+#         # 1. We call the existing HTML endpoint
+#         url = f"{API_URL}/items/set/{set_no}/risk_value/{condition}/visualize"
+#         params = {"buy_price": buy_price}
+        
+#         response = requests.get(url, params=params)
+        
+#         if response.status_code == 200:
+#             # 2. We display the HTML string directly in Streamlit
+#             components.html(response.text, height=800, scrolling=True)
+#             # Return dummy data so the rest of your script doesn't crash
+#             return None, 0, None, 0, 0
+#         else:
+#             return None, 0, f"API Error: {response.status_code}", 0, 0
+            
+#     except Exception as e:
+#         return None, 0, f"Connection Failed: {str(e)}", 0, 0
+
+
+# def get_real_projections(set_no: str, condition: Literal['N', 'U'], buy_price: float):
+#     try:
+#         # We call the functions directly (no requests/API overhead)
+#         # Ensure these functions are imported at the top of your streamlit_app.py
+#         # from your_fastapi_filename import get_set_inventory, get_projections_list
+        
+#         inventory = get_set_inventory(set_no) 
+        
+#         if not inventory:
+#             return None, 0, "No inventory found", 0, 0
+            
+#         # Filter regular inventory (matching your FastAPI logic)
+#         regular_inventory = [
+#             part for part in inventory 
+#             if not part.is_alternate and not part.is_counterpart
+#         ]
+
+#         if not regular_inventory:
+#              return None, 0, "No regular items found in inventory", 0, 0
+
+#         # Calculate Metadata
+#         num_lots = len(regular_inventory)
+#         total_items = sum(part.quantity for part in regular_inventory)
+
+#         # Get the actual projection data
+#         projections_list, total_part_out_value = get_projections_list(condition, buy_price, regular_inventory)
+        
+#         # Convert to DataFrame for the Streamlit charts to use
+#         df = pd.DataFrame(projections_list)
+        
+#         return df, total_part_out_value, None, num_lots, total_items
+        
+    # except Exception as e:
+    #     # This will show you the EXACT error in the Streamlit UI
+    #     return None, 0, f"Processing Error: {str(e)}", 0, 0
+    
 
 def get_real_projections(set_no: str, condition: Literal['N', 'U'], buy_price: float):
     try:

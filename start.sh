@@ -1,7 +1,12 @@
 #!/bin/bash
 
-# Start FastAPI on port 8000
-uvicorn app.app_fastapi:app --host 0.0.0.0 --port 8000 &
+# 1. Start FastAPI in the background
+# We use 127.0.0.1 for internal communication
+uvicorn app.app_fastapi:app --host 127.0.0.1 --port 8000 &
 
-# Start Streamlit on the port Railway provides ($PORT)
-streamlit run app/streamlit_app.py --server.port $PORT --server.address 0.0.0.0
+# 2. Wait a few seconds for FastAPI to actually boot up
+sleep 5
+
+# 3. Start Streamlit (This is the one Railway "sees")
+streamlit run app/app_streamlit.py --server.port $PORT --server.address 0.0.0.0
+
