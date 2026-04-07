@@ -63,11 +63,14 @@ TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2" # Replace with your Token Secr
 # TOKEN_SECRET = "F117B1921E344DB2AF74C26DEEDB1CA7"
 
 #IP     184.71.139.178 StarBucks broadway
-ACCESS_TOKEN = "C43E5D5FD4244E21A3B35EFBD1E6D523"
-TOKEN_SECRET = "B3285CDD9D5D4992BAFDD90784DB7C3D"
+# ACCESS_TOKEN = "C43E5D5FD4244E21A3B35EFBD1E6D523"
+# TOKEN_SECRET = "B3285CDD9D5D4992BAFDD90784DB7C3D"
 
 # if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
 #     raise ValueError("Missing one or more BrickLink API credentials in .env file.")
+
+# Temporary debug: Print all available environment keys to see what Railway IS providing
+print(f"DEBUG: Available Env Keys: {list(os.environ.keys())}")
 
 # DEBUGGING PRINTS (Check your Railway Logs for these)
 print(f"DEBUG: CONSUMER_KEY present: {bool(CONSUMER_KEY)}")
