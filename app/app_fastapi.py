@@ -66,8 +66,24 @@ TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2" # Replace with your Token Secr
 ACCESS_TOKEN = "C43E5D5FD4244E21A3B35EFBD1E6D523"
 TOKEN_SECRET = "B3285CDD9D5D4992BAFDD90784DB7C3D"
 
+# if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
+#     raise ValueError("Missing one or more BrickLink API credentials in .env file.")
+
+# DEBUGGING PRINTS (Check your Railway Logs for these)
+print(f"DEBUG: CONSUMER_KEY present: {bool(CONSUMER_KEY)}")
+print(f"DEBUG: TOKEN_VALUE present: {bool(TOKEN_VALUE)}")
+
 if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
-    raise ValueError("Missing one or more BrickLink API credentials in .env file.")
+    # This prints exactly which one is missing to your logs
+    missing = [k for k, v in {
+        "KEY": CONSUMER_KEY, 
+        "C_SECRET": CONSUMER_SECRET, 
+        "TOKEN": TOKEN_VALUE, 
+        "T_SECRET": TOKEN_SECRET
+    }.items() if not v]
+    print(f"CRITICAL ERROR: Missing variables: {missing}")
+    # Keep your raise here so the app doesn't try to run with broken auth
+    raise ValueError(f"Missing BrickLink credentials: {missing}")
 
 
 # Define the directory where inventory files will be saved
