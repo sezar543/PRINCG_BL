@@ -100,14 +100,29 @@ TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2" # Replace with your Token Secr
 #     raise ValueError(f"Missing BrickLink credentials: {missing}")
 
 
-# Define the directory where inventory files will be saved
-INVENTORY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'inventories')
+# # Define the directory where inventory files will be saved
+# INVENTORY_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'inventories')
 
-# Define the directory where statistics files will be saved (adjacent to the app folder)
-STATISTICS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'statistics')
+# # Define the directory where statistics files will be saved (adjacent to the app folder)
+# STATISTICS_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'statistics')
 
-# Define the new directory for set-specific price guide reports
-PRICE_GUIDE_SET_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'price_guide_set')
+# # Define the new directory for set-specific price guide reports
+# PRICE_GUIDE_SET_DIR = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'price_guide_set')
+
+
+# Get the base directory where the app is running (usually /app on Railway)
+BASE_DIR = os.getcwd()
+
+# Define paths relative to the base
+INVENTORY_DIR = os.path.join(BASE_DIR, 'inventories')
+STATISTICS_DIR = os.path.join(BASE_DIR, 'statistics')
+PRICE_GUIDE_SET_DIR = os.path.join(BASE_DIR, 'price_guide_set')
+
+# Create these directories if they don't exist (CRITICAL for Railway)
+for folder in [INVENTORY_DIR, STATISTICS_DIR, PRICE_GUIDE_SET_DIR]:
+    if not os.path.exists(folder):
+        os.makedirs(folder, exist_ok=True)
+
 
 # 2. Logic Fix: Map condition codes to full words
 condition_map = {'N': 'new', 'U': 'used'}

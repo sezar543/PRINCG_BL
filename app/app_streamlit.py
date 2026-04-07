@@ -11,6 +11,7 @@ import requests
 from app_fastapi import get_set_inventory, get_projections_list
 
 API_URL = os.getenv("API_URL", "http://localhost:8000")
+API_URL = "http://127.0.0.1:8000"
 
 # Example call:
 # response = requests.get(f"{API_URL}/items/set/{set_no}...")
