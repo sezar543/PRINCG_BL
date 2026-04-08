@@ -28,7 +28,7 @@ st.set_page_config(page_title="Set Sales & ROI Tracker", layout="wide")
 
 def get_real_projections(set_no: str, condition: str, buy_price: float):
     try:
-        url = f"{API_URL}/items/set/{set_no}/risk_value/{condition}/data"
+        url = f"{API_URL}/items/set/{set_no}/data"
         params = {"condition": condition, "buy_price": buy_price}
         
         # DEBUG PRINT: This will show up in Railway logs
