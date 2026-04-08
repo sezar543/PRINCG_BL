@@ -24,32 +24,56 @@ condition_map = {
 # --- CONFIGURATION & PAGE SETUP ---
 st.set_page_config(page_title="Set Sales & ROI Tracker", layout="wide")
 
-        
+
 def get_real_projections(set_no: str, condition: str, buy_price: float):
     try:
-        # We call the FastAPI endpoint we created in Step 1
         url = f"API_URL/items/set/{set_no}/risk_value/{condition}/data"
         params = {"condition": condition, "buy_price": buy_price}
         
-        response = requests.get(url, params=params)
+        # DEBUG PRINT: This will show up in Railway logs
+        print(f"DEBUG: Streamlit is calling URL: {url} with params {params}")
+        
+        response = requests.get(url, params=params, timeout=30) # Add a timeout
+        
+        print(f"DEBUG: FastAPI responded with status: {response.status_code}")
         
         if response.status_code == 200:
             result = response.json()
-            # result['projections'] is now a standard list of dicts
-            df = pd.DataFrame(result['projections'])
-            
-            return (
-                df, 
-                result['part_out_value'], 
-                None, 
-                result['num_lots'], 
-                result['total_items']
-            )
+            return pd.DataFrame(result['projections']), result['part_out_value'], None, result['num_lots'], result['total_items']
         else:
-            return None, 0, f"API Error: {response.status_code}", 0, 0
+            # Reveal the actual error from FastAPI
+            error_detail = response.text
+            return None, 0, f"Backend Error {response.status_code}: {error_detail}", 0, 0
             
     except Exception as e:
+        print(f"DEBUG: Request failed entirely: {str(e)}")
         return None, 0, f"Connection Failed: {str(e)}", 0, 0
+        
+# def get_real_projections(set_no: str, condition: str, buy_price: float):
+#     try:
+#         # We call the FastAPI endpoint we created in Step 1
+#         url = f"API_URL/items/set/{set_no}/risk_value/{condition}/data"
+#         params = {"condition": condition, "buy_price": buy_price}
+        
+#         response = requests.get(url, params=params)
+        
+#         if response.status_code == 200:
+#             result = response.json()
+#             # result['projections'] is now a standard list of dicts
+#             df = pd.DataFrame(result['projections'])
+            
+#             return (
+#                 df, 
+#                 result['part_out_value'], 
+#                 None, 
+#                 result['num_lots'], 
+#                 result['total_items']
+#             )
+#         else:
+#             return None, 0, f"API Error: {response.status_code}", 0, 0
+            
+#     except Exception as e:
+#         return None, 0, f"Connection Failed: {str(e)}", 0, 0
     
 
 # def get_real_projections(set_no: str, condition: Literal['N', 'U'], buy_price: float):
