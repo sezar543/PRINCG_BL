@@ -916,6 +916,24 @@ def get_set_projected_sale_visuals(
 #     prob_selling = min(1.0, sales_vol / denominator) if denominator > 0 else 0.0
 #     return qty * price * prob_selling
 
+
+@app.get("/items/set/{set_no}/data")
+def get_set_data_api(set_no: str, condition: str, buy_price: float = 0.0):
+    # 1. Call your existing logic function
+    inventory = get_set_inventory(set_no)
+    
+    # 2. Call your projection logic
+    projections_list, total_part_out_value = get_projections_list(condition, buy_price, inventory)
+    
+    # 3. Return everything as a dictionary (FastAPI converts this to JSON automatically)
+    return {
+        "projections": projections_list,
+        "part_out_value": total_part_out_value,
+        "num_lots": len(inventory),
+        "total_items": sum(p.quantity for p in inventory)
+    }
+
+
 @app.get("/items/set/{set_no}/risk_value/{condition}", 
          response_model=ProjectedSaleResult, 
          summary="Calculate Risk & 24-Month ROI Projection")

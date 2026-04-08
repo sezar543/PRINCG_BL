@@ -37,9 +37,9 @@ After ingestion, the core data processing will involve normalizing the raw sales
 
 #### 2.2 Computation of Statistics: Expected Return Value
 
-This is the key output of the project. Given a LEGO set number, we want to calculate the **Expected Return Value ($\mathbb{E}[R]$)** of parting it out after one month.
+This is the key output of the project. Given a LEGO set number, we want to calculate the **Expected Return Value ($\mathbb{E}[R]$)** of parting it out in the next 24 months.
 
-* **Formula:** The expected value of the set's parts is the sum of the expected values of its individual parts.
+* **Formula:** The expected value of a set's parts is the sum of expected values of its individual parts.
 
 $$
 \mathbb{E}[R_{Set}] = \sum_{i \in Set} \mathbb{E}[R_{Part_i}]
