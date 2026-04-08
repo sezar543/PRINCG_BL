@@ -114,7 +114,12 @@ TOKEN_SECRET = "192A31C402C84AABB37EB1CD886707C2" # Replace with your Token Secr
 BASE_DIR = os.getcwd()
 
 # Define paths relative to the base
-INVENTORY_DIR = os.path.join(BASE_DIR, 'inventories')
+
+# INVENTORY_DIR = os.path.join(BASE_DIR, 'inventories')
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__)) 
+INVENTORY_DIR = "/app/inventories" # This matches your Volume Mount Path exactly
+
 STATISTICS_DIR = os.path.join(BASE_DIR, 'statistics')
 PRICE_GUIDE_SET_DIR = os.path.join(BASE_DIR, 'price_guide_set')
 
@@ -919,19 +924,25 @@ def get_set_projected_sale_visuals(
 
 @app.get("/items/set/{set_no}/data")
 def get_set_data_api(set_no: str, condition: str, buy_price: float = 0.0):
-    # 1. Call your existing logic function
-    inventory = get_set_inventory(set_no)
-    
-    # 2. Call your projection logic
-    projections_list, total_part_out_value = get_projections_list(condition, buy_price, inventory)
-    
-    # 3. Return everything as a dictionary (FastAPI converts this to JSON automatically)
-    return {
-        "projections": projections_list,
-        "part_out_value": total_part_out_value,
-        "num_lots": len(inventory),
-        "total_items": sum(p.quantity for p in inventory)
-    }
+    try:
+        print(f"DEBUG: FastAPI starting inventory fetch for {set_no}")
+        inventory = get_set_inventory(set_no)
+        
+        print(f"DEBUG: Inventory fetched. Calculating projections...")
+        projections_list, total_part_out_value = get_projections_list(condition, buy_price, inventory)
+        
+        return {
+            "projections": projections_list,
+            "part_out_value": total_part_out_value,
+            "num_lots": len(inventory),
+            "total_items": sum(p.quantity for p in inventory)
+        }
+    except Exception as e:
+        # This will print the FULL error to your Railway logs
+        import traceback
+        print(f"CRITICAL ERROR in FastAPI: {str(e)}")
+        print(traceback.format_exc()) 
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 @app.get("/items/set/{set_no}/risk_value/{condition}", 
