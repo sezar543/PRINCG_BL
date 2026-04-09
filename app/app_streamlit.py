@@ -381,23 +381,23 @@ with tab_analysis:
 with tab_guide:
     st.title("User Guide & Strategic Analysis")
     
-    g_col1, g_col2 = st.columns(2)
-    with g_col1:
-        st.markdown("""
-        <div class="help-card">
-            <div class="concept-title">📈 What is Sale Projection?</div>
-            <p>This predicts your <b>"Sales Speed."</b> It shows the cumulative money returned to your pocket month-by-month based on market demand. It helps you see how long your cash is "tied up" in plastic.</p>
-        </div>
-        """, unsafe_allow_html=True)
-    with g_col2:
-        st.markdown("""
-        <div class="help-card">
-            <div class="concept-title">💰 ROI (Return on Investment)</div>
-            <p>ROI shows how hard your money is working. 
-            <b>100%</b> means you got your initial investment back. 
-            Anything <b>above 100%</b> is profit you can use to grow your store.</p>
-        </div>
-        """, unsafe_allow_html=True)
+    # g_col1, g_col2 = st.columns(2)
+    # with g_col1:
+    st.markdown("""
+    <div class="help-card">
+        <div class="concept-title">📈 What is Sale Projection?</div>
+        <p>This predicts your <b>"Sales Speed."</b> It shows the cumulative money returned to your pocket month-by-month based on market demand. It helps you see how long your cash is "tied up" in plastic.</p>
+    </div>
+    """, unsafe_allow_html=True)
+    # with g_col2:
+    st.markdown("""
+    <div class="help-card">
+        <div class="concept-title">💰 ROI (Return on Investment)</div>
+        <p>ROI shows how hard your money is working. 
+        <b>100%</b> means you got your initial investment back. 
+        Anything <b>above 100%</b> is profit you can use to grow your store.</p>
+    </div>
+    """, unsafe_allow_html=True)
 
     st.subheader("💡 The Sprinter vs. The Marathoner")
     st.write("""Imagine you have **$1,000** to spend. You are choosing to buy 10 copies of each of two sets 78361 and 78387, but then you thought: "Wait a minute! I should also look at the ROI graph and compare the turnaround of these two sets..." By using the **ROI Comparison Graph**, you see a clear difference between the two sets:""")
