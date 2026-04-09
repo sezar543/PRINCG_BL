@@ -10,6 +10,21 @@ import requests
 
 from app_fastapi import get_set_inventory, get_projections_list
 
+# 1. Get the directory where app_streamlit.py is located
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+# 2. Build the path to the images folder relative to this file
+# This works on Windows AND Railway automatically
+img_path = os.path.join(current_dir, "images", "roi_75361,75387.png")
+
+if os.path.exists(img_path):
+    st.image(img_path, caption="ROI Comparison Graph")
+else:
+    # Diagnostic message to help you see where the app is looking
+    st.error(f"Image not found at: {img_path}")
+    st.info(f"Current working directory: {os.getcwd()}")
+
+
 API_URL = os.getenv("API_URL", "http://localhost:8000")
 API_URL = "http://127.0.0.1:8000"
 
@@ -23,6 +38,28 @@ condition_map = {
 
 # --- CONFIGURATION & PAGE SETUP ---
 st.set_page_config(page_title="Set Sales & ROI Tracker", layout="wide")
+
+
+# --- DEBUG SIDEBAR (Add this here) ---
+with st.sidebar:
+    st.header("🛠️ Debug Tools")
+    if st.button("🔍 Check Image Files"):
+        # We check the directory relative to this script
+        img_folder = os.path.join(current_dir, "images")
+        if os.path.exists(img_folder):
+            files = os.listdir(img_folder)
+            st.write(f"Files found in {img_folder}:")
+            st.write(files)
+        else:
+            st.error(f"Directory not found: {img_folder}")
+            
+    # Also check the Volume while we are at it
+    if st.button("📦 Check Volume"):
+        vol_path = "/app/inventories"
+        if os.path.exists(vol_path):
+            st.write(f"Inventories in Volume: {os.listdir(vol_path)}")
+        else:
+            st.error("Volume path /app/inventories not found")
 
 
 
@@ -364,12 +401,22 @@ with tab_guide:
 
     st.subheader("💡 The Sprinter vs. The Marathoner")
     st.write("""Imagine you have **$1,000** to spend. You are choosing to buy 10 copies of each of two sets 78361 and 78387, but then you thought: "Wait a minute! I should also look at the ROI graph and compare the turnaround of these two sets..." By using the **ROI Comparison Graph**, you see a clear difference between the two sets:""")
+
+    # Clean logic that works on Windows and Railway
+    img_filename = "roi_75361,75387.png"
+    img_path = os.path.join(current_dir, "images", img_filename)
     
-    # 4) Improved image path logic
-    img_path = "C:\\Pricing_BL\\app\\images\\roi_75361,75387.png"
-    if not os.path.exists(img_path):
-        img_path = "/app/images/roi_78361,78387.png"
-    
+    if os.path.exists(img_path):
+        st.image(img_path, caption="ROI Comparison Graph")
+    else:
+        st.error(f"Image not found. Railway is looking at: {img_path}")
+
+    # Improved image path logic
+    # img_path = "C:\\Pricing_BL\\app\\images\\roi_75361,75387.png"
+    # if not os.path.exists(img_path):
+    #     img_path = "/app/images/roi_78361,78387.png"
+
+
     if os.path.exists(img_path):
         st.image(img_path, caption="ROI Comparison Graph")
     else:
