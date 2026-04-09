@@ -17,12 +17,12 @@ current_dir = os.path.dirname(os.path.abspath(__file__))
 # This works on Windows AND Railway automatically
 img_path = os.path.join(current_dir, "images", "roi_75361,75387.png")
 
-if os.path.exists(img_path):
-    st.image(img_path, caption="ROI Comparison Graph")
-else:
-    # Diagnostic message to help you see where the app is looking
-    st.error(f"Image not found at: {img_path}")
-    st.info(f"Current working directory: {os.getcwd()}")
+# if os.path.exists(img_path):
+#     st.image(img_path, caption="ROI Comparison Graph")
+# else:
+#     # Diagnostic message to help you see where the app is looking
+#     st.error(f"Image not found at: {img_path}")
+#     st.info(f"Current working directory: {os.getcwd()}")
 
 
 API_URL = os.getenv("API_URL", "http://localhost:8000")
