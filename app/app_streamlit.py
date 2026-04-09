@@ -40,26 +40,26 @@ condition_map = {
 st.set_page_config(page_title="Set Sales & ROI Tracker", layout="wide")
 
 
-# --- DEBUG SIDEBAR (Add this here) ---
-with st.sidebar:
-    st.header("🛠️ Debug Tools")
-    if st.button("🔍 Check Image Files"):
-        # We check the directory relative to this script
-        img_folder = os.path.join(current_dir, "images")
-        if os.path.exists(img_folder):
-            files = os.listdir(img_folder)
-            st.write(f"Files found in {img_folder}:")
-            st.write(files)
-        else:
-            st.error(f"Directory not found: {img_folder}")
+# # --- DEBUG SIDEBAR (Add this here) ---
+# with st.sidebar:
+#     st.header("🛠️ Debug Tools")
+#     if st.button("🔍 Check Image Files"):
+#         # We check the directory relative to this script
+#         img_folder = os.path.join(current_dir, "images")
+#         if os.path.exists(img_folder):
+#             files = os.listdir(img_folder)
+#             st.write(f"Files found in {img_folder}:")
+#             st.write(files)
+#         else:
+#             st.error(f"Directory not found: {img_folder}")
             
-    # Also check the Volume while we are at it
-    if st.button("📦 Check Volume"):
-        vol_path = "/app/inventories"
-        if os.path.exists(vol_path):
-            st.write(f"Inventories in Volume: {os.listdir(vol_path)}")
-        else:
-            st.error("Volume path /app/inventories not found")
+#     # Also check the Volume while we are at it
+#     if st.button("📦 Check Volume"):
+#         vol_path = "/app/inventories"
+#         if os.path.exists(vol_path):
+#             st.write(f"Inventories in Volume: {os.listdir(vol_path)}")
+#         else:
+#             st.error("Volume path /app/inventories not found")
 
 
 
