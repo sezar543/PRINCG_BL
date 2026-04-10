@@ -13,6 +13,7 @@
 # 3. Specifically re-ignore the junk inside the app folder
 /app/**/__pycache__/
 /app/**/*.pyc
+/app/**/credentials.json
 
 
 

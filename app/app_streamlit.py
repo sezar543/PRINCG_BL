@@ -293,7 +293,7 @@ with tab_analysis:
                 full_id = f"{entry['id']}-{entry['suffix']}"
 
                 #Update status to "being retrieved"
-                status_messages.append(f"- The inventory and sale data of the set {full_id} is being retrieved...")
+                status_messages.append(f"⏳ The inventory and sale data of the set {full_id} is being retrieved...")
                 # Render messages in a red centered div
                 status_area.markdown(f'<div class="status-text-container">{"<br>".join(status_messages)}</div>', unsafe_allow_html=True)
 
@@ -313,7 +313,7 @@ with tab_analysis:
                         'total_items': t_items     # Added to results_state
                     })
 
-                    status_messages[-1] = f"- The inventory and sale data of the set {full_id} is retrieved."
+                    status_messages[-1] = f"✅ The inventory and sale data of the set {full_id} is retrieved."
                     status_area.markdown(f'<div class="status-text-container">{"<br>".join(status_messages)}</div>', unsafe_allow_html=True)
 
             except: continue
@@ -400,7 +400,7 @@ with tab_guide:
     """, unsafe_allow_html=True)
 
     st.subheader("💡 The Sprinter vs. The Marathoner")
-    st.write("""Imagine you have **$1,000** to spend. You are choosing to buy 10 copies of each of two sets 78361 and 78387, but then you thought: "Wait a minute! I should also look at the ROI graph and compare the turnaround of these two sets..." By using the **ROI Comparison Graph**, you see a clear difference between the two sets:""")
+    st.write("""Imagine you have **$1,000** to spend. You are choosing to buy 10 copies of each of two sets 75361 and 75387, but then you thought: "Wait a minute! I should also look at the ROI graph and compare the turnaround of these two sets..." By using the **ROI Comparison Graph**, you see a clear difference between the two sets:""")
 
     # Clean logic that works on Windows and Railway
     img_filename = "roi_75361,75387.png"
