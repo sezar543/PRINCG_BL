@@ -48,7 +48,17 @@ ACCESS_TOKEN = os.environ.get("BRICKLINK_TOKEN_VALUE")
 TOKEN_SECRET = os.environ.get("BRICKLINK_TOKEN_SECRET")
 
 
+ACCESS_TOKEN = "C251EE63370A4B7F81DD21DE45176719" 
+TOKEN_SECRET = "D1517DCF204C41D5815629BE350C168D"
 
+# 2. If those are empty, it means you are running LOCALLY
+if not ACCESS_TOKEN:
+    # Use your Home/Breka tokens here as hardcoded defaults ONLY for local
+    ACCESS_TOKEN = "C251EE63370A4B7F81DD21DE45176719" 
+    TOKEN_SECRET = "D1517DCF204C41D5815629BE350C168D"
+    print("Running locally: Using Home/Manual tokens")
+else:
+    print(f"Running on Railway: Using environment tokens for IP {8.228.94.164}")
 
 
 
@@ -63,17 +73,17 @@ TOKEN_SECRET = os.environ.get("BRICKLINK_TOKEN_SECRET")
 # print(f"DEBUG: CONSUMER_KEY present: {bool(CONSUMER_KEY)}")
 # print(f"DEBUG: TOKEN_VALUE present: {bool(TOKEN_VALUE)}")
 
-# if not all([CONSUMER_KEY, CONSUMER_SECRET, TOKEN_VALUE, TOKEN_SECRET]):
-#     # This prints exactly which one is missing to your logs
-#     missing = [k for k, v in {
-#         "KEY": CONSUMER_KEY, 
-#         "C_SECRET": CONSUMER_SECRET, 
-#         "TOKEN": TOKEN_VALUE, 
-#         "T_SECRET": TOKEN_SECRET
-#     }.items() if not v]
-#     print(f"CRITICAL ERROR: Missing variables: {missing}")
-#     # Keep your raise here so the app doesn't try to run with broken auth
-#     raise ValueError(f"Missing BrickLink credentials: {missing}")
+if not all([CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, TOKEN_SECRET]):
+    # This prints exactly which one is missing to your logs
+    missing = [k for k, v in {
+        "KEY": CONSUMER_KEY, 
+        "C_SECRET": CONSUMER_SECRET, 
+        "TOKEN": ACCESS_TOKEN, 
+        "T_SECRET": TOKEN_SECRET
+    }.items() if not v]
+    print(f"CRITICAL ERROR: Missing variables: {missing}")
+    # Keep your raise here so the app doesn't try to run with broken auth
+    raise ValueError(f"Missing BrickLink credentials: {missing}")
 
 
 # # Define the directory where inventory files will be saved
