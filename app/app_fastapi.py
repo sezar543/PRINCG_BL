@@ -58,7 +58,7 @@ if not ACCESS_TOKEN:
     TOKEN_SECRET = "D1517DCF204C41D5815629BE350C168D"
     print("Running locally: Using Home/Manual tokens")
 else:
-    print(f"Running on Railway: Using environment tokens for IP {8.228.94.164}")
+    print(f"Running on Railway: Using environment tokens for IP {"8.228.94.164"}")
 
 
 
