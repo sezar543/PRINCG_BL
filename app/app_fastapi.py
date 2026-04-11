@@ -48,8 +48,20 @@ ACCESS_TOKEN = os.environ.get("BRICKLINK_TOKEN_VALUE")
 TOKEN_SECRET = os.environ.get("BRICKLINK_TOKEN_SECRET")
 
 
-ACCESS_TOKEN = "BEF2A98ED4B94B7695E6B2C945F6E79B" 
-TOKEN_SECRET = "84607872616D4C7A90A1494985E572EA"
+print("ENV ACCESS TOKEN:", os.environ.get("BRICKLINK_TOKEN_VALUE"))
+
+# ACCESS_TOKEN = "BEF2A98ED4B94B7695E6B2C945F6E79B" 
+# TOKEN_SECRET = "84607872616D4C7A90A1494985E572EA"
+
+ACCESS_TOKEN = os.environ.get("BRICKLINK_TOKEN_VALUE")
+TOKEN_SECRET = os.environ.get("BRICKLINK_TOKEN_SECRET")
+
+if ACCESS_TOKEN:
+    print("Running on Railway: Using environment tokens")
+else:
+    ACCESS_TOKEN = "LOCAL_TOKEN"
+    TOKEN_SECRET = "LOCAL_SECRET"
+    print("Running locally: Using fallback tokens")
 
 # 2. If those are empty, it means you are running LOCALLY
 if not ACCESS_TOKEN:
@@ -58,7 +70,7 @@ if not ACCESS_TOKEN:
     TOKEN_SECRET = "D1517DCF204C41D5815629BE350C168D"
     print("Running locally: Using Home/Manual tokens")
 else:
-    print(f"Running on Railway: Using environment tokens for IP {"8.228.94.164"}")
+    print(f"Running on Railway: Using environment tokens for IP 8.228.94.164")
 
 
 
