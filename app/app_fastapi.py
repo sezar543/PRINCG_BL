@@ -48,13 +48,8 @@ ACCESS_TOKEN = os.environ.get("BRICKLINK_TOKEN_VALUE")
 TOKEN_SECRET = os.environ.get("BRICKLINK_TOKEN_SECRET")
 
 
-print("ENV ACCESS TOKEN:", os.environ.get("BRICKLINK_TOKEN_VALUE"))
+# print("ENV ACCESS TOKEN:", os.environ.get("BRICKLINK_TOKEN_VALUE"))
 
-# ACCESS_TOKEN = "BEF2A98ED4B94B7695E6B2C945F6E79B" 
-# TOKEN_SECRET = "84607872616D4C7A90A1494985E572EA"
-
-ACCESS_TOKEN = os.environ.get("BRICKLINK_TOKEN_VALUE")
-TOKEN_SECRET = os.environ.get("BRICKLINK_TOKEN_SECRET")
 
 if ACCESS_TOKEN:
     print("Running on Railway: Using environment tokens")
@@ -66,8 +61,11 @@ else:
 # 2. If those are empty, it means you are running LOCALLY
 if not ACCESS_TOKEN:
     # Use your Home/Breka tokens here as hardcoded defaults ONLY for local
-    ACCESS_TOKEN = "C251EE63370A4B7F81DD21DE45176719" 
-    TOKEN_SECRET = "D1517DCF204C41D5815629BE350C168D"
+    load_dotenv()
+    CONSUMER_KEY = os.getenv("BRICKLINK_CONSUMER_KEY")
+    CONSUMER_SECRET = os.getenv("BRICKLINK_CONSUMER_SECRET")
+    ACCESS_TOKEN = os.getenv("BRICKLINK_TOKEN_VALUE")
+    TOKEN_SECRET = os.getenv("BRICKLINK_TOKEN_SECRET")
     print("Running locally: Using Home/Manual tokens")
 else:
     print(f"Running on Railway: Using environment tokens for IP 8.228.94.164")

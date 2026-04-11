@@ -386,7 +386,8 @@ with tab_guide:
     st.markdown("""
     <div class="help-card">
         <div class="concept-title">📈 What is Sale Projection?</div>
-        <p>This predicts your <b>"Sales Speed."</b> It shows the cumulative money returned to your pocket month-by-month based on market demand. It helps you see how long your cash is "tied up" in plastic.</p>
+        <p>This predicts your <b>"Sales Speed."</b> — how quickly your money comes back to you over time.
+        It shows your cumulative cash return month by month based on real demand, helping you see how long your money is tied up in inventory.</p>
     </div>
     """, unsafe_allow_html=True)
     # with g_col2:
